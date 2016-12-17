@@ -68,3 +68,27 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+swarrot:
+    provider: pecl
+    connections:
+        rabbitmq:
+            host: '%rabbitmq_host%'
+            port: 5672
+            login: '%rabbitmq_login%'
+            password: '%rabbitmq_password%'
+            vhost: '/'
+    consumers:
+        send_astronaut_to_space:
+            processor: processor.send_astronaut_to_space
+            extras:
+                poll_interval: 500000
+                requeue_on_error: false
+            middleware_stack:
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_exchange: 'retry'
+                      retry_attempts: 3
+                      retry_routing_key_pattern: 'send_astronaut_to_space_retry_%%attempt%%'
