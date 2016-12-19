@@ -23,7 +23,7 @@
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
         "swarrot/swarrot-bundle": "^1.4",
-        "videlalvaro/php-amqplib": "^2.6"
+        "odolbeau/rabbit-mq-admin-toolkit": "^3.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

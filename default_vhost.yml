@@ -1,0 +1,17 @@
+'/':
+    parameters:
+        with_dl: false # If true, all queues will have a dl and the corresponding mapping with the exchange "dl"
+        with_unroutable: false # If true, all exchange will be declared with an unroutable config
+
+    exchanges:
+        default:
+            type: direct
+            durable: true
+
+    queues:
+        send_astronaut_to_space:
+            durable: true
+            retries: [5, 25, 100] # Create a retry exchange with 3 retry queues prefixed with send_astronaut_to_space
+            bindings:
+                - exchange: default
+                  routing_key: send_astronaut_to_space

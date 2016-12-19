@@ -70,11 +70,13 @@ swiftmailer:
     spool:     { type: memory }
 
 swarrot:
-    provider: pecl
+    provider: pecl # pecl or amqp_lib
+    default_connection: rabbitmq
+    default_command: swarrot.command.base # Swarrot\SwarrotBundle\Command\SwarrotCommand
     connections:
         rabbitmq:
             host: '%rabbitmq_host%'
-            port: 5672
+            port: '%rabbitmq_port%'
             login: '%rabbitmq_login%'
             password: '%rabbitmq_password%'
             vhost: '/'
@@ -92,3 +94,8 @@ swarrot:
                       retry_exchange: 'retry'
                       retry_attempts: 3
                       retry_routing_key_pattern: 'send_astronaut_to_space_retry_%%attempt%%'
+    messages_types:
+        send_astronaut_to_space_publisher:
+            connection: rabbitmq
+            exchange: default
+            routing_key: send_astronaut_to_space

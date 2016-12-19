@@ -19,6 +19,6 @@ parameters:
     secret:            ThisTokenIsNotSoSecretChangeIt
 
     rabbitmq_host: localhost
-    rabbitmq_port: 15672
+    rabbitmq_port: 5672
     rabbitmq_login: guest
     rabbitmq_password: guest
